@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index');
+
+Route::get('/single-animal', 'PagesController@singleAnimal');
+
+Route::get('/create-animal', 'PagesController@createAnimal');
+
+Route::get('/edit-animal', 'PagesController@editAnimal');
