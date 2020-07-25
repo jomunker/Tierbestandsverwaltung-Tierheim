@@ -11,9 +11,9 @@ class PagesController extends Controller
         return view('pages.index');
     }
 
-    public function singleAnimal()
+    public function showAnimal()
     {
-        return view('pages.animal.singleAnimal');
+        return view('pages.animal.showAnimal');
     }
 
     public function createAnimal()
@@ -24,5 +24,20 @@ class PagesController extends Controller
     public function editAnimal()
     {
         return view('pages.animal.editAnimal');
+    }
+
+    public function viewBreeds()
+    {
+        return view('pages.breed.overviewBreeds');
+    }
+
+    public function createBreed()
+    {
+        return view('pages.breed.createBreed');
+    }
+
+    public function editBreed()
+    {
+        return view('pages.breed.editAnimal');
     }
 }
