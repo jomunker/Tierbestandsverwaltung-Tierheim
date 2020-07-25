@@ -8,30 +8,61 @@
 <div>
     <form>
         <div class="row pb-4">
-            <div class="col-sm-12 col-md-6 pt-2 pb-2">
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name eingeben..." required>
+                <input type="text" class="form-control" id="name" placeholder="Namen eingeben..." required>
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="aufnahme">Aufnahmedatum</label>
-                <input type="date" class="form-control" id="aufnahme" required>
+                <label for="geschlecht">Geschlecht</label>
+                <select class="form-control">
+                    <option>weiblich</option>
+                    <option>männlich</option>
+                </select>        
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                <label for="rasse">Rasse</label>
+                {{-- <select class="form-control">
+                    <option>Golden Retriever</option>
+                    <option>Mops</option>
+                    <option>Labrador</option>
+                    <option>Husky</option>
+                </select>         --}}
+                <input type="text" class="form-control" id="rasse" placeholder="Rasse eingeben..." required>
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                <label for="tierart">Tierart</label>
+                <input type="text" class="form-control" id="tierart" placeholder="Tierart eingeben..." required>
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                <label for="abteilung">Abteilung</label>
+                <select class="form-control">
+                    <option>Hunde</option>
+                    <option>Katzen</option>
+                    <option>Kleintiere</option>
+                    <option>Vögel</option>
+                </select>               
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                <label for="farbe">Farbe(n)</label>
+                <input type="text" class="form-control" id="farbe" placeholder="Farbe(n) eingeben..." required>
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                <label for="size">Größe</label>
+                <select class="form-control" >
+                    <option>sehr klein</option>
+                    <option>klein</option>
+                    <option selected>mittel</option>
+                    <option>groß</option>
+                    <option>sehr groß</option>
+                </select>                
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="geburt">Geburtsdatum</label>
                 <input type="date" class="form-control" id="geburt" required>
             </div>
-            <div class="col-sm-12 col-md-6 pt-2 pb-2">
-                <label for="farbe">Farbe(n)</label>
-                <input type="text" class="form-control" id="farbe" placeholder="Farbe(n) eingeben..." required>
-            </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="rasse">Rasse</label>
-                <select class="form-control">
-                    <option>Golden Retriever</option>
-                    <option>Mops</option>
-                    <option>Labrador</option>
-                    <option>Husky</option>
-                </select>        
+                <label for="aufnahme">Aufnahmedatum</label>
+                <input type="date" class="form-control" id="aufnahme" required>
             </div>
             {{-- <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="tierart">Tierart</label>
@@ -42,13 +73,6 @@
                     <option>Reptil</option>
                 </select>        
             </div> --}}
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="geschlecht">Geschlecht</label>
-                <select class="form-control">
-                    <option>weiblich</option>
-                    <option>männlich</option>
-                </select>        
-            </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="kastriert">Kastriert</label>
                 <select class="form-control">
