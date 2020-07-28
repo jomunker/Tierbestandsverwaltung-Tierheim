@@ -57,9 +57,9 @@
             @foreach ($animals as $animal)
                 <div class="col-sm-6 col-lg-4">
                     <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col-auto d-none d-block">
+                        {{-- <div class="col-auto d-none d-block">
                             <img class="img-fluid" src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </div>
+                        </div> --}}
                         <div class="col p-4 d-flex flex-column position-static">
                             <h2 class="mb-0">{{ $animal->name }}</h2>
                             <ul class="pt-2 list-unstyled">
@@ -87,12 +87,13 @@
                                 </li>
                             </ul> 
                             {{-- <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p> --}}
-                        <a href="/Tierbestandsverwaltung/public/animals/{{$animal->id}}" class="stretched-link">Mehr anzeigen</a>
+                        <a href="/animals/{{$animal->id}}" class="stretched-link">Mehr anzeigen</a>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+        {{ $animals->links() }}
     @else 
         <h3 class="text-info">Keine Tiere gefunden.</h3>  
     @endif

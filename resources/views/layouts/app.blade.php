@@ -10,6 +10,7 @@
         @include('inc.nav')
 
         <div class="container-xl pt-4 pb-4">
+            @include('inc.messages')
             @yield('content')
         </div>
 

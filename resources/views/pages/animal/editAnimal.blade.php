@@ -3,73 +3,64 @@
 @section('content')
 
 
-<h1>Tier bearbeiten</h1>
-
+<h1>{{$animal->name}} bearbeiten</h1>
 <div>
-    <form>
+    {!! Form::open(['action' => ['AnimalsController@update', $animal->id], 'method' => 'POST']) !!}
+    <div class="form-group">
         <div class="row pb-4">
-            <div class="col-sm-12 col-md-6 pt-2 pb-2">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name eingeben..." required>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('name', 'Name')}}
+                {{Form::text('name', $animal->name, ['class' => 'form-control', 'placeholder' => 'Namen eingeben'])}}
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="aufnahme">Aufnahmedatum</label>
-                <input type="date" class="form-control" id="aufnahme" required>
+                {{Form::label('geschlecht', 'Geschlecht')}}
+                {{Form::select('geschlecht', ['w' => 'weiblich', 'm' => 'männlich'], $animal->gender, ['class' => 'form-control'])}}  
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="geburt">Geburtsdatum</label>
-                <input type="date" class="form-control" id="geburt" required>
-            </div>
-            <div class="col-sm-12 col-md-6 pt-2 pb-2">
-                <label for="farbe">Farbe(n)</label>
-                <input type="text" class="form-control" id="farbe" placeholder="Farbe(n) eingeben..." required>
+                {{Form::label('rasse', 'Rasse')}}
+                {{Form::text('rasse', $animal->breed->breed, ['class' => 'form-control', 'placeholder' => 'Rasse eingeben'])}}
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="rasse">Rasse</label>
-                <select class="form-control">
-                    <option>Golden Retriever</option>
-                    <option>Mops</option>
-                    <option>Labrador</option>
-                    <option>Husky</option>
-                </select>        
-            </div>
-            {{-- <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="tierart">Tierart</label>
-                <select class="form-control" id="tierart">
-                    <option>Hund</option>
-                    <option>Katze</option>
-                    <option>Vogel</option>
-                    <option>Reptil</option>
-                </select>        
-            </div> --}}
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="geschlecht">Geschlecht</label>
-                <select class="form-control">
-                    <option>weiblich</option>
-                    <option>männlich</option>
-                </select>        
+                {{Form::label('tierart', 'Tierart')}}
+                {{Form::text('tierart', $animal->breed->species->species, ['class' => 'form-control', 'placeholder' => 'Tierart eingeben'])}}
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="kastriert">Kastriert</label>
-                <select class="form-control">
-                    <option>Ja</option>
-                    <option>Nein</option>
-                </select>        
+                {{Form::label('abteilung', 'Abteilung')}}
+                {{Form::select('abteilung', $departments->pluck('department'), $animal->breed->species->department_id, ['class' => 'form-control'])}}             
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="vermittelt">Vermittelt</label>
-                <select class="form-control">
-                    <option>Ja</option>
-                    <option>Nein</option>
-                </select>        
+                {{Form::label('farbe', 'Farbe(n)')}}
+                {{Form::text('farbe', $animal->colors, ['class' => 'form-control', 'placeholder' => 'Farbe(n) eingeben'])}}
             </div>
-            <div class="col-sm-12 col-md-6 pt-2 pb-2">
-                <label for="beschreibung">Beschreibung</label>
-                <textarea type="text" class="form-control" id="beschreibung" placeholder="Beschreibung eingeben..." required></textarea>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('groesse', 'Größe')}}
+                {{Form::select('groesse', ['sehr klein' => 'sehr klein', 'klein' => 'klein',  'mittel' => 'mittel',  'groß' => 'groß',  'sehr groß' => 'sehr groß'], $animal->size, ['class' => 'form-control'])}}               
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('geburt', 'Geburtsdatum')}}
+                {{Form::date('geburt', $animal->birth_date, ['class' => 'form-control'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('aufnahme', 'Aufnahmedatum')}}
+                {{Form::date('aufnahme', $animal->admission_date, ['class' => 'form-control'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('kastriert', 'Kastriert')}}
+                {{Form::select('kastriert', ['0' => 'nein', '1' => 'ja'], $animal->castrated, ['class' => 'form-control'])}}     
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('vermittelt', 'Vermittelt')}}
+                {{Form::select('vermittelt', ['0' => 'nein', '1' => 'ja'], $animal->mediated, ['class' => 'form-control'])}}     
+            </div>
+            <div class="col-sm-12 col-md-6 pt-2 pb-2"> 
+                {{Form::label('beschreibung', 'Beschreibung')}}
+                {{Form::textarea('beschreibung', $animal->description, ['class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Aktualisieren</button>
-    </form>
+        {{Form::hidden('_method', 'PUT')}}
+        {{Form::submit('Tier aktualisieren', ['class' => 'btn btn-primary'])}}
+    </div>
+    {!! Form::close() !!}
 </div>
 
 

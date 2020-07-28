@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="d-flex w-100">
+    <a href="/animals" class="btn btn-secondary mb-4">Zurück</a>
+    <a href="/animals/{{$animal->id}}/edit" class="btn btn-secondary mb-4 ml-auto" style="width: fit-content">Bearbeiten</a>
+    {!!Form::open(['action' => ['AnimalsController@destroy', $animal->id], '_method' => 'POST', 'class' => 'ml-2'])!!}
+        {{Form::hidden('_method', 'DELETE')}}
+        {{Form::submit('Löschen', ['class' => 'btn btn-danger'])}}
+    {!!Form::close()!!}
+</div>
 
-<a href="/Tierbestandsverwaltung/public/animals" class="btn btn-secondary mb-4">Zurück</a>
+
+
 <div class="row mb-3" style="height: 300px;">
         <div class="col-6 d-none d-block w-100" style="height: 100%;">
             <img class="rounded w-100" style="object-fit: cover; height: 100%;" src="https://images.pexels.com/photos/2007/animal-dog-pet-cute.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500">

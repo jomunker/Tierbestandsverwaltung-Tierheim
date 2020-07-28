@@ -6,7 +6,67 @@
 <h1>Tier hinzufügen</h1>
 
 <div>
-    <form>
+    {!! Form::open(['action' => 'AnimalsController@store', 'method' => 'POST']) !!}
+    <div class="form-group">
+
+
+
+        <div class="row pb-4">
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('name', 'Name')}}
+                {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Namen eingeben'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('geschlecht', 'Geschlecht')}}
+                {{Form::select('geschlecht', ['w' => 'weiblich', 'm' => 'männlich'], 'w', ['class' => 'form-control'])}}  
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('rasse', 'Rasse')}}
+                {{Form::text('rasse', '', ['class' => 'form-control', 'placeholder' => 'Rasse eingeben'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('tierart', 'Tierart')}}
+                {{Form::text('tierart', '', ['class' => 'form-control', 'placeholder' => 'Tierart eingeben'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('abteilung', 'Abteilung')}}
+                {{Form::select('abteilung', $departments->pluck('department'), '', ['class' => 'form-control'])}}             
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('farbe', 'Farbe(n)')}}
+                {{Form::text('farbe', '', ['class' => 'form-control', 'placeholder' => 'Farbe(n) eingeben'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('groesse', 'Größe')}}
+                {{Form::select('groesse', ['sehr klein' => 'sehr klein', 'klein' => 'klein',  'mittel' => 'mittel',  'groß' => 'groß',  'sehr groß' => 'sehr groß'], 'mittel', ['class' => 'form-control'])}}               
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('geburt', 'Geburtsdatum')}}
+                {{Form::date('geburt', \Carbon\Carbon::now(), ['class' => 'form-control'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('aufnahme', 'Aufnahmedatum')}}
+                {{Form::date('aufnahme', \Carbon\Carbon::now(), ['class' => 'form-control'])}}
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('kastriert', 'Kastriert')}}
+                {{Form::select('kastriert', ['0' => 'nein', '1' => 'ja'], '0', ['class' => 'form-control'])}}     
+            </div>
+            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+                {{Form::label('vermittelt', 'Vermittelt')}}
+                {{Form::select('vermittelt', ['0' => 'nein', '1' => 'ja'], '0', ['class' => 'form-control'])}}     
+            </div>
+            <div class="col-sm-12 col-md-6 pt-2 pb-2"> 
+                {{Form::label('beschreibung', 'Beschreibung')}}
+                {{Form::textarea('beschreibung', '', ['class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
+            </div>
+        </div>
+        {{Form::submit('Tier hinzufügen', ['class' => 'btn btn-primary'])}}
+    </div>
+    {!! Form::close() !!}
+
+    {{-- <form>
+
         <div class="row pb-4">
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="name">Name</label>
@@ -21,12 +81,6 @@
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="rasse">Rasse</label>
-                {{-- <select class="form-control">
-                    <option>Golden Retriever</option>
-                    <option>Mops</option>
-                    <option>Labrador</option>
-                    <option>Husky</option>
-                </select>         --}}
                 <input type="text" class="form-control" id="rasse" placeholder="Rasse eingeben..." required>
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
@@ -64,15 +118,6 @@
                 <label for="aufnahme">Aufnahmedatum</label>
                 <input type="date" class="form-control" id="aufnahme" required>
             </div>
-            {{-- <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="tierart">Tierart</label>
-                <select class="form-control" id="tierart">
-                    <option>Hund</option>
-                    <option>Katze</option>
-                    <option>Vogel</option>
-                    <option>Reptil</option>
-                </select>        
-            </div> --}}
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 <label for="kastriert">Kastriert</label>
                 <select class="form-control">
@@ -93,7 +138,7 @@
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Tier hinzufügen</button>
-    </form>
+    </form> --}}
 </div>
 
 
