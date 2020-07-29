@@ -1,14 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex w-100">
-    <a href="/animals" class="btn btn-secondary mb-4">Zurück</a>
-    <a href="/animals/{{$animal->id}}/edit" class="btn btn-secondary mb-4 ml-auto" style="width: fit-content">Bearbeiten</a>
-    {!!Form::open(['action' => ['AnimalsController@destroy', $animal->id], '_method' => 'POST', 'class' => 'ml-2'])!!}
-        {{Form::hidden('_method', 'DELETE')}}
-        {{Form::submit('Löschen', ['class' => 'btn btn-danger'])}}
-    {!!Form::close()!!}
-</div>
+
+    <div class="d-flex w-100">
+        <a href="/animals" class="btn btn-secondary mb-4">Zurück</a>
+        @if (!Auth::guest())
+        <a href="/animals/{{$animal->id}}/edit" class="btn btn-secondary mb-4 ml-auto" style="width: fit-content">Bearbeiten</a>
+        {!!Form::open(['action' => ['AnimalsController@destroy', $animal->id], '_method' => 'POST', 'class' => 'ml-2'])!!}
+            {{Form::hidden('_method', 'DELETE')}}
+            {{Form::submit('Löschen', ['class' => 'btn btn-danger'])}}
+        {!!Form::close()!!}
+        @endif
+    </div>
+
+
 
 
 

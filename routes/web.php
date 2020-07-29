@@ -15,19 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PagesController@index');
 
-Route::get('/single-animal', 'PagesController@showAnimal');
-
-Route::get('/create-animal', 'PagesController@createAnimal');
-
-Route::get('/edit-animal', 'PagesController@editAnimal');
-
-Route::get('/overview-breeds', 'PagesController@viewBreeds');
-
-Route::get('/create-breed', 'PagesController@createBreed');
-
-Route::get('/edit-breed', 'PagesController@editBreed');
-
-
 Route::resource('animals', 'AnimalsController');
+Auth::routes();
 
-
+Route::get('/dashboard', 'DashboardController@index');
