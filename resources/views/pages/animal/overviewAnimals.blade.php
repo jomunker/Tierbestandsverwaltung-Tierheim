@@ -57,9 +57,11 @@
             @foreach ($animals as $animal)
                 <div class="col-sm-6 col-lg-4">
                     <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        {{-- <div class="col-auto d-none d-block">
-                            <img class="img-fluid" src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </div> --}}
+                        @if ($animal->animal_picture != null)
+                            <div class="col-auto d-none d-block" style="height: 15rem">
+                                <img class="img-fluid"  style="height: 100%; width: 100%; object-fit: cover;" src="/storage/animal_pictures/{{$animal->animal_picture}}">
+                            </div>
+                        @endif
                         <div class="col p-4 d-flex flex-column position-static">
                             <h2 class="mb-0">{{ $animal->name }}</h2>
                             <ul class="pt-2 list-unstyled">

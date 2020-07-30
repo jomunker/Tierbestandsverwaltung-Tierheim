@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="d-flex w-100">
-        <a href="/animals" class="btn btn-secondary mb-4">Zurück</a>
+        <a href="/animals" class="btn btn-primary mb-4">Zurück</a>
         @if (!Auth::guest())
         <a href="/animals/{{$animal->id}}/edit" class="btn btn-secondary mb-4 ml-auto" style="width: fit-content">Bearbeiten</a>
         {!!Form::open(['action' => ['AnimalsController@destroy', $animal->id], '_method' => 'POST', 'class' => 'ml-2'])!!}
@@ -16,11 +16,14 @@
 
 
 
+<h1 class="text-center mb-4" style="font-size: 3rem">Hi, ich bin {{ $animal->name }}!</h1>
 
-<div class="row mb-3" style="height: 300px;">
-        <div class="col-6 d-none d-block w-100" style="height: 100%;">
-            <img class="rounded w-100" style="object-fit: cover; height: 100%;" src="https://images.pexels.com/photos/2007/animal-dog-pet-cute.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-        </div>
+<div class="row mb-3" style="height: 20rem;">
+        @if ($animal->animal_picture != null)
+            <div class="col-6 d-none d-block w-100" style="height: 100%;">
+                <img class="rounded w-100" style="object-fit: cover; height: 100%;" src="/storage/animal_pictures/{{$animal->animal_picture}}">
+            </div>
+        @endif
         <div class=" col-6 pr-3 pl-3 d-flex flex-column position-static card" style="height: 100%;">
           <ul class="list-unstyled d-flex flex-column mt-3" style="margin: 0; height: 100%">
                 <li class="flex-fill w-100"><strong>Geschlecht: </strong>
@@ -35,6 +38,7 @@
                 {{-- <li class="flex-fill w-100"><strong>Geburtsdatum: </strong><span class="text-muted"><?php echo $age ?></span></li> --}}
             <li class="flex-fill w-100"><strong>Alter: </strong><span class="text-muted">{{ $animal->getAge() }}</span></li>
                 <li class="flex-fill w-100"><strong>Größe: </strong><span class="text-muted">{{ $animal->size }}</span></li>
+                <li class="flex-fill w-100"><strong>Farbe(n): </strong><span class="text-muted">{{ $animal->colors }}</span></li>
                 <?php $date = date('d.m.Y', strtotime($animal->admission_date)) ?>
                 <li class="flex-fill w-100"><strong>Im Tierheim seit: </strong><span class="text-muted"><?php echo $date ?></span></li>
                 <li class="flex-fill w-100"><strong>Kastriert: </strong>
@@ -52,36 +56,20 @@
                 </li>
             </ul> 
         </div>
-</div>
-<div>
-<div class="ml-auto mr-auto mt-5 mb-5" >
-    <h1 class="text-center">Hi, ich bin {{ $animal->name }}!</h1>
-    <p class="mt-3 w-100 text-justify" style="column-count: 2; width: 50%;">{{ $animal->description }}</p>
-</div>
-<hr>
-<div class="ml-auto mr-auto mt-5 mb-5">
-    <h3>Du möchtest mich besser kennenlernen?</h3>
-    <ul class="list-unstyled d-flex flex-column">
-        <li class="flex-fill w-100"><strong>Ansprechpartner: </strong><span class="text-muted">{{$animal->breed->species->department->contact_name}} {{$animal->breed->species->department->contact_surname}}</span></li>
-        <li class="flex-fill w-100"><strong>Abteilung: </strong><span class="text-muted">{{$animal->breed->species->department->department}}</span></li>
-        <li class="flex-fill w-100"><strong>Telefonnummer: </strong><span class="text-muted">{{$animal->breed->species->department->contact_telefon}}</span></li>
-    </ul>
-</div>
-</div>
-
-<div class="row mb-3"  style="height: 300px">
-    <div class="col-sm-6 col-lg-4 p-3" style="height: 100%">
-        <img class="rounded w-100" style="height: 100%; object-fit: cover;" src="https://images.pexels.com/photos/2007/animal-dog-pet-cute.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500">
     </div>
-    <div class="col-sm-6 col-lg-4 p-3" style="height: 100%">
-        <img class="rounded w-100" style="height: 100%; object-fit: cover;" src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-    </div>
-    <div class="col-sm-6 col-lg-4 p-3" style="height: 100%">
-        <img class="rounded w-100" style="height: 100%; object-fit: cover;" src="https://images.pexels.com/photos/3663082/pexels-photo-3663082.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+    <div>
+        <div class="ml-auto mr-auto mt-4 mb-4" >
+            <p class="mt-3 w-100 text-justify" style="column-count: 2; width: 50%;">{{ $animal->description }}</p>
+        </div>
+    <hr>
+    <div class="ml-auto mr-auto mt-4 mb-4">
+        <h3>Du möchtest mich besser kennenlernen?</h3>
+        <ul class="list-unstyled d-flex flex-column">
+            <li class="flex-fill w-100"><strong>Ansprechpartner: </strong><span class="text-muted">{{$animal->breed->species->department->contact_name}} {{$animal->breed->species->department->contact_surname}}</span></li>
+            <li class="flex-fill w-100"><strong>Abteilung: </strong><span class="text-muted">{{$animal->breed->species->department->department}}</span></li>
+            <li class="flex-fill w-100"><strong>Telefonnummer: </strong><span class="text-muted"><a href="tel:{{$animal->breed->species->department->contact_telefon}}">{{$animal->breed->species->department->contact_telefon}}</a></span></li>
+        </ul>
     </div>
 </div>
-
-
-
 
 @endsection

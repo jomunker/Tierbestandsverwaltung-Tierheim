@@ -6,7 +6,7 @@
 <h1>Tier hinzufügen</h1>
 
 <div>
-    {!! Form::open(['action' => 'AnimalsController@store', 'method' => 'POST']) !!}
+    {!! Form::open(['action' => 'AnimalsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
 
 
@@ -59,6 +59,9 @@
             <div class="col-sm-12 col-md-6 pt-2 pb-2"> 
                 {{Form::label('beschreibung', 'Beschreibung')}}
                 {{Form::textarea('beschreibung', '', ['class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
+            </div>
+            <div class="col-sm-12 col-md-12 pt-2 pb-2"> 
+                {{Form::File('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
             </div>
         </div>
         {{Form::submit('Tier hinzufügen', ['class' => 'btn btn-primary'])}}

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Animal;
 use App\Breed;
 use App\Species;
 use App\Department;
+use SebastianBergmann\Environment\Console;
 
 class AnimalsController extends Controller
 {
@@ -56,9 +58,13 @@ class AnimalsController extends Controller
             'name' => 'required',
             'rasse' => 'required',
             'tierart' => 'required',
-            'farbe' => 'required'
+            'farbe' => 'required',
+            'animal_picture' => 'image|nullable|max:1999'
         ]);
 
+        /**
+         * Handle relationships when creating a new animal
+         */
         // get department id
         $department = intval($request->input('abteilung'));
 
@@ -71,6 +77,24 @@ class AnimalsController extends Controller
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
         $breed = Breed::firstOrCreate(['breed'=>$breedname], ['species_id'=>$species->id] );
+        
+        /**     
+        * Handle file upload
+        */
+        //$filenameToStore = '';
+
+        if($request->hasFile('tierbild')) {
+            // get filename with extension
+            $filenameWithExt = $request->file('tierbild')->getClientOriginalName();
+            // get just the filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // get just extension
+            $extension = $request->file('tierbild')->getClientOriginalExtension();
+            // filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            // upload image
+            $path = $request->file('tierbild')->storeAs('public/animal_pictures', $filenameToStore);
+        }
 
         // Create animal with values from form
         $animal = new Animal;
@@ -84,6 +108,7 @@ class AnimalsController extends Controller
         $animal->admission_date = $request->input('aufnahme');
         $animal->mediated = $request->input('vermittelt');
         $animal->castrated = $request->input('kastriert');
+        $animal->animal_picture = $filenameToStore;
         $animal->save();
         return redirect('/animals')->with('success', 'Tier angelegt');
     }
@@ -145,6 +170,22 @@ class AnimalsController extends Controller
         // try to create a new breed if it doesn't exist already
         $breed = Breed::firstOrCreate(['breed'=>$breedname], ['species_id'=>$species->id] );
 
+        /**     
+        * Handle file upload
+        */
+        if($request->hasFile('tierbild')) {
+            // get filename with extension
+            $filenameWithExt = $request->file('tierbild')->getClientOriginalName();
+            // get just the filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // get just extension
+            $extension = $request->file('tierbild')->getClientOriginalExtension();
+            // filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            // upload image
+            $path = $request->file('tierbild')->storeAs('public/animal_pictures', $filenameToStore);
+        }
+
         // Create animal with values from form
         $animal = Animal::find($id);
         $animal->name = $request->input('name');
@@ -157,6 +198,14 @@ class AnimalsController extends Controller
         $animal->admission_date = $request->input('aufnahme');
         $animal->mediated = $request->input('vermittelt');
         $animal->castrated = $request->input('kastriert');
+        if($request->hasFile('tierbild')){
+            if($animal->animal_picture != null){
+                Storage::delete('public/animal_pictures/'.$animal->animal_picture);
+                $animal->animal_picture = $filenameToStore;
+            } else {
+                $animal->animal_picture = $filenameToStore;
+            }
+        }
         $animal->save();
         return redirect('/animals')->with('success', 'Tier aktualisiert');
     }
@@ -170,6 +219,12 @@ class AnimalsController extends Controller
     public function destroy($id)
     {
         $animal = Animal::find($id);
+
+        if($animal->animal_picture != null) {
+            // delete image
+            Storage::delete('public/animal_pictures/'.$animal->animal_picture);
+        }
+
         $animal->delete();
         return redirect('/animals')->with('success', 'Tier entfernt');
     }

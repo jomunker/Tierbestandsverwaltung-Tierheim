@@ -5,7 +5,7 @@
 
 <h1>{{$animal->name}} bearbeiten</h1>
 <div>
-    {!! Form::open(['action' => ['AnimalsController@update', $animal->id], 'method' => 'POST']) !!}
+    {!! Form::open(['action' => ['AnimalsController@update', $animal->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
         <div class="row pb-4">
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
@@ -55,6 +55,9 @@
             <div class="col-sm-12 col-md-6 pt-2 pb-2"> 
                 {{Form::label('beschreibung', 'Beschreibung')}}
                 {{Form::textarea('beschreibung', $animal->description, ['class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
+            </div>
+            <div class="col-sm-12 col-md-12 pt-2 pb-2"> 
+                {{Form::File('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
             </div>
         </div>
         {{Form::hidden('_method', 'PUT')}}
