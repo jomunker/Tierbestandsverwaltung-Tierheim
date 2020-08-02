@@ -3,13 +3,11 @@
 @section('content')
 
 
-<h1>Tier hinzufügen</h1>
+<h1 class="font-weight-bold">Tier hinzufügen</h1>
 
 <div>
     {!! Form::open(['action' => 'AnimalsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
-
-
 
         <div class="row pb-4">
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
@@ -18,7 +16,7 @@
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('geschlecht', 'Geschlecht')}}
-                {{Form::select('geschlecht', ['w' => 'weiblich', 'm' => 'männlich'], 'w', ['class' => 'form-control'])}}  
+                {{Form::select('geschlecht', ['w' => 'weiblich', 'm' => 'männlich'], 'm', ['class' => 'form-control'])}}  
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('rasse', 'Rasse')}}
@@ -60,11 +58,12 @@
                 {{Form::label('beschreibung', 'Beschreibung')}}
                 {{Form::textarea('beschreibung', '', ['class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
             </div>
-            <div class="col-sm-12 col-md-12 pt-2 pb-2"> 
+            <div class="col-sm-12 col-md-12 pt-4 pb-2"> 
                 {{Form::File('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
+                <small class="text-muted mt-2 d-block">Maximale Dateigröße 2MB</small>
             </div>
         </div>
-        {{Form::submit('Tier hinzufügen', ['class' => 'btn btn-primary'])}}
+        {{Form::submit('Tier hinzufügen', ['class' => 'btn btn-success'])}}
     </div>
     {!! Form::close() !!}
 

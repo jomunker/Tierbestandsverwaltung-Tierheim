@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PagesController@index');
 
+Route::get('/search', 'PagesController@search');
+
 Route::resource('animals', 'AnimalsController');
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');

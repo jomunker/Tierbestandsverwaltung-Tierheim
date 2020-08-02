@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <h1 class="font-weight-bold mt-3 mb-4">Home</h1>
+    <h1 class="font-weight-bold mt-3 mb-4">Dashboard</h1>
     <div class="panel">
         
     </div> 

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <div class="container">
-      <a class="navbar-brand" href="{{ url('/') }}">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-xl">
+      <a class="navbar-brand" href="{{ url('/animals') }}">
           {{ config('app.name', 'Laravel') }}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -11,7 +11,10 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/animals">Übersicht</a>
+                <a class="nav-link" href="/animals">Tierübersicht</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/search">Suche</a>
               </li>
               @if (!Auth::guest())
                 <li class="nav-item align-items-end">          

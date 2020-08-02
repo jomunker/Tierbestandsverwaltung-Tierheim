@@ -3,53 +3,7 @@
 @section('content')
 
 
-<h1>Übersicht</h1>
-
-<div>
-    {{-- <h4 class="text-muted">Filtern</h4> --}}
-    <form>
-        <div class="row pb-4">
-            <div class="col-sm-12 col-md-6 pt-2 pb-2">
-                <label for="suche">Suchen</label>
-                <input type="text" class="form-control" id="suche" placeholder="Suchbegriff eingeben...">
-            </div>
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="tierart">Tierart</label>
-                <select class="form-control" name="tierart">
-                    <option>Hund</option>
-                    <option>Katze</option>
-                    <option>Vogel</option>
-                    <option>Reptil</option>
-                </select>        
-            </div>
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="tierart">Rasse</label>
-                <select class="form-control">
-                    <option>Golden Retriever</option>
-                    <option>Husky</option>
-                    <option>Labrador</option>
-                    <option>Mops</option>
-                </select>        
-            </div>
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="tierart">Geschlecht</label>
-                <select class="form-control">
-                    <option>weiblich</option>
-                    <option>männlich</option>
-                </select>        
-            </div>
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
-                <label for="tierart">Kastriert</label>
-                <select class="form-control">
-                    <option>Ja</option>
-                    <option>Nein</option>
-                </select>        
-            </div>
-        </div>
-    </form>
-</div>
-
-
+<h1 class="font-weight-bold mt-3 mb-4">Übersicht</h1>
 
     @if(count($animals) >= 1) 
         <div class="row mb-3">

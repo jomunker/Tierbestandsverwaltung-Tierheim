@@ -3,9 +3,9 @@
 @section('content')
 
     <div class="d-flex w-100">
-        <a href="/animals" class="btn btn-primary mb-4">Zurück</a>
+        <a href="/animals" class="btn btn-secondary mb-4 text-white">Zurück</a>
         @if (!Auth::guest())
-        <a href="/animals/{{$animal->id}}/edit" class="btn btn-secondary mb-4 ml-auto" style="width: fit-content">Bearbeiten</a>
+        <a href="/animals/{{$animal->id}}/edit" class="btn btn-dark mb-4 ml-auto" style="width: fit-content">Bearbeiten</a>
         {!!Form::open(['action' => ['AnimalsController@destroy', $animal->id], '_method' => 'POST', 'class' => 'ml-2'])!!}
             {{Form::hidden('_method', 'DELETE')}}
             {{Form::submit('Löschen', ['class' => 'btn btn-danger'])}}
@@ -16,7 +16,7 @@
 
 
 
-<h1 class="text-center mb-4" style="font-size: 3rem">Hi, ich bin {{ $animal->name }}!</h1>
+<h1 class="text-center mt-3 mb-4" style="font-size: 3rem">Hi, ich bin {{ $animal->name }}!</h1>
 
 <div class="row mb-3" style="height: 20rem;">
         @if ($animal->animal_picture != null)

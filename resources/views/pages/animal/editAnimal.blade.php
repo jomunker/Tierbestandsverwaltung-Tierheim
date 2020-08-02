@@ -3,7 +3,7 @@
 @section('content')
 
 
-<h1>{{$animal->name}} bearbeiten</h1>
+<h1 class="font-weight-bold mt-3 mb-4">{{$animal->name}} bearbeiten</h1>
 <div>
     {!! Form::open(['action' => ['AnimalsController@update', $animal->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
@@ -56,12 +56,13 @@
                 {{Form::label('beschreibung', 'Beschreibung')}}
                 {{Form::textarea('beschreibung', $animal->description, ['class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
             </div>
-            <div class="col-sm-12 col-md-12 pt-2 pb-2"> 
+            {{Form::hidden('max_file_size', '2000000')}}
+            <div class="col-sm-12 col-md-12 pt-4 pb-2"> 
                 {{Form::File('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
             </div>
         </div>
         {{Form::hidden('_method', 'PUT')}}
-        {{Form::submit('Tier aktualisieren', ['class' => 'btn btn-primary'])}}
+        {{Form::submit('Tier aktualisieren', ['class' => 'btn btn-success'])}}
     </div>
     {!! Form::close() !!}
 </div>

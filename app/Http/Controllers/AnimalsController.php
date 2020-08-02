@@ -59,7 +59,7 @@ class AnimalsController extends Controller
             'rasse' => 'required',
             'tierart' => 'required',
             'farbe' => 'required',
-            'animal_picture' => 'image|nullable|max:1999'
+            'tierbild' => 'image|nullable|max:1999'
         ]);
 
         /**
@@ -81,8 +81,6 @@ class AnimalsController extends Controller
         /**     
         * Handle file upload
         */
-        //$filenameToStore = '';
-
         if($request->hasFile('tierbild')) {
             // get filename with extension
             $filenameWithExt = $request->file('tierbild')->getClientOriginalName();
