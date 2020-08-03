@@ -16,6 +16,10 @@ class Animal extends Model
         return Carbon::parse($this->attributes['birth_date'])->age;
     }
 
+
+    /**
+     * Setup relationships
+     */
     // setup relationship between animal and breed
     public function breed() {
         return $this->hasOne(Breed::class, 'id', 'breed_id');
@@ -31,5 +35,41 @@ class Animal extends Model
     public function getDepartment()
     {
         return $this->hasOneThrough(Department::class, Species::class);
+    }
+    
+
+
+    /**
+     * Setup search function
+     */
+
+    // scope for search term
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%');
+    }
+    
+    // scope for gender
+    public function scopeGender($query, $gender)
+    {
+        if($gender != '') {
+            return $query->where('gender', '=', $gender);
+        }
+    }
+
+    // scope for castreated
+    public function scopeCastrated($query, $castrated)
+    {
+        if($castrated != '') {
+            return $query->where('castrated', '=', $castrated);
+        }
+    }
+
+    // scope for categories
+    public function scopeCategory($query, $id)
+    {
+        return $query->whereHas('breed', function ($query) use ( $id ){
+            $query->where('species_id', '=', $id);
+        });
     }
 }

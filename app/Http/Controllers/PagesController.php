@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Animal;
 use Illuminate\Http\Request;
 use App\Species;
 
@@ -12,9 +13,5 @@ class PagesController extends Controller
         return view('pages.index');
     }
 
-    public function search()
-    {
-        $species = Species::all();
-        return view('pages.search')->with('species', $species);
-    }
+
 }

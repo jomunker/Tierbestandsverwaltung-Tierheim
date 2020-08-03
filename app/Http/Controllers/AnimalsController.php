@@ -8,6 +8,7 @@ use App\Animal;
 use App\Breed;
 use App\Species;
 use App\Department;
+use Fouladgar\EloquentBuilder\EloquentBuilder;
 use SebastianBergmann\Environment\Console;
 
 class AnimalsController extends Controller
@@ -32,6 +33,31 @@ class AnimalsController extends Controller
     {
         $animals = Animal::orderBy('name', 'asc')->paginate(6);
         return view('pages.animal.overviewAnimals')->with('animals', $animals);
+    }
+
+    public function search()
+    {
+        $request = request();
+
+        $animals = Animal::Search($request->suche)->Gender($request->geschlecht)->Castrated($request->kastriert)->orderBy('name', 'asc')->paginate(6);
+        return view('pages.animal.overviewAnimals')->with('animals', $animals);
+    }
+    
+    public function categories()
+    {
+        $breeds = Breed::all();
+        $species = Species::all();
+
+        // $animals = Animal::Search($request->suche)->Gender($request->geschlecht)->Castrated($request->kastriert)->orderBy('name', 'asc')->paginate(6);
+        return view('pages.categories')->with('species', $species);
+    }
+
+    public function showCategory($id)
+    {
+        $category = Species::find($id);
+        $animals = Animal::Category($id)->orderBy('name', 'asc')->paginate(6);
+        // return $animals;
+        return view('pages.showCategory')->with('animals', $animals)->with('category', $category);
     }
 
     /**

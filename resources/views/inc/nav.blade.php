@@ -14,7 +14,7 @@
                 <a class="nav-link" href="/animals">Tierübersicht</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/search">Suche</a>
+                <a class="nav-link" href="/categories">Kategorien</a>
               </li>
               @if (!Auth::guest())
                 <li class="nav-item align-items-end">          
