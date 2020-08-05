@@ -21,7 +21,11 @@ Route::get('/categories', 'AnimalsController@categories');
 
 Route::get('/categories/{category}', 'AnimalsController@showCategory');
 
+Route::get('/categories/animals/{animal}', 'AnimalsController@show');
+
 Route::resource('animals', 'AnimalsController');
+
+Route::resource('departments', 'DepartmentController');
 
 Auth::routes();
 

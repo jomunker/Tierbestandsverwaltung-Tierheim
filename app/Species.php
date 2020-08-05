@@ -12,4 +12,14 @@ class Species extends Model
     {
         return $this->hasOne(Department::class, 'id', 'department_id');
     }
+
+    public function breeds()
+    {
+        return $this->hasMany(Breed::class);
+    }
+    
+    public function animals()
+    {
+        return $this->hasManyThrough(Animal::class, Breed::class);
+    }
 }

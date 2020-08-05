@@ -66,10 +66,10 @@ class Animal extends Model
     }
 
     // scope for categories
-    public function scopeCategory($query, $id)
-    {
-        return $query->whereHas('breed', function ($query) use ( $id ){
-            $query->where('species_id', '=', $id);
-        });
-    }
+    // public function scopeCategory($query, $id)
+    // {
+    //     return $query->whereHas('breed', function ($query) use ( $id ){
+    //         $query->where('species_id', '=', $id);
+    //     });
+    // }
 }

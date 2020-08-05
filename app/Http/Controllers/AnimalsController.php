@@ -45,19 +45,22 @@ class AnimalsController extends Controller
     
     public function categories()
     {
-        $breeds = Breed::all();
-        $species = Species::all();
+        // $breeds = Breed::all();
+        $species = Species::orderBy('species', 'asc')->paginate(6);
 
         // $animals = Animal::Search($request->suche)->Gender($request->geschlecht)->Castrated($request->kastriert)->orderBy('name', 'asc')->paginate(6);
         return view('pages.categories')->with('species', $species);
     }
 
     public function showCategory($id)
-    {
+    {        
         $category = Species::find($id);
-        $animals = Animal::Category($id)->orderBy('name', 'asc')->paginate(6);
+        //$animals = Animal::Category($id)->orderBy('name', 'asc')->paginate(6);
         // return $animals;
-        return view('pages.showCategory')->with('animals', $animals)->with('category', $category);
+
+        // $animals = $category->animals->sortByDesc('name');
+        
+        return view('pages.showCategory')->with('category', $category);
     }
 
     /**
@@ -132,7 +135,11 @@ class AnimalsController extends Controller
         $animal->admission_date = $request->input('aufnahme');
         $animal->mediated = $request->input('vermittelt');
         $animal->castrated = $request->input('kastriert');
+        if($request->hasFile('tierbild')) {
         $animal->animal_picture = $filenameToStore;
+        } else {
+            $animal->animal_picture = "";
+        }
         $animal->save();
         return redirect('/animals')->with('success', 'Tier angelegt');
     }
@@ -178,7 +185,8 @@ class AnimalsController extends Controller
             'name' => 'required',
             'rasse' => 'required',
             'tierart' => 'required',
-            'farbe' => 'required'
+            'farbe' => 'required',
+            'tierbild' => 'image|nullable|max:1999'
         ]);
 
         // get department id
@@ -250,6 +258,6 @@ class AnimalsController extends Controller
         }
 
         $animal->delete();
-        return redirect('/animals')->with('success', 'Tier entfernt');
+        return redirect('/animals')->with('danger', 'Tier entfernt');
     }
 }
