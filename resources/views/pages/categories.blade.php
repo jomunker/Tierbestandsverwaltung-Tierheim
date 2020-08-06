@@ -2,13 +2,21 @@
 
 @section('content')
 
+    <div class="d-flex w-100 align-items-center">
+        <h1 class="font-weight-bold mt-3 mb-4">Tierarten</h1>
 
-    <h1 class="font-weight-bold mt-3 mb-4">Tierarten</h1>
+        @if (!Auth::guest())
+            <a href="/animals/create" class="btn btn-success mb-4 ml-auto"
+                style="width: fit-content; height: fit-content">Tier hinzufügen</a>
+        @endif
+    </div>
+
     <div class="row mb-3">
         @foreach ($species as $specie)
             @if (!$specie->animals->isEmpty())
                 <div class="col-sm-6 col-md-4">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div
+                        class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         @if ($specie->animals->firstWhere('animal_picture') != null)
                             <div class="col-auto d-none d-block" style="height: 15rem">
                                 <img class="img-fluid" style="height: 100%; width: 100%; object-fit: cover;"
@@ -34,4 +42,3 @@
         @endforeach
     </div>
 @endsection
-

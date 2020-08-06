@@ -14,14 +14,14 @@ use SebastianBergmann\Environment\Console;
 class AnimalsController extends Controller
 {
 
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'categories', 'showCategory', 'search']]);
     }
 
     /**
@@ -42,7 +42,7 @@ class AnimalsController extends Controller
         $animals = Animal::Search($request->suche)->Gender($request->geschlecht)->Castrated($request->kastriert)->orderBy('name', 'asc')->paginate(6);
         return view('pages.animal.overviewAnimals')->with('animals', $animals);
     }
-    
+
     public function categories()
     {
         // $breeds = Breed::all();
@@ -53,13 +53,13 @@ class AnimalsController extends Controller
     }
 
     public function showCategory($id)
-    {        
+    {
         $category = Species::find($id);
         //$animals = Animal::Category($id)->orderBy('name', 'asc')->paginate(6);
         // return $animals;
 
         // $animals = $category->animals->sortByDesc('name');
-        
+
         return view('pages.showCategory')->with('category', $category);
     }
 
@@ -100,17 +100,17 @@ class AnimalsController extends Controller
         // get value from 'tierart' field
         $speciesname = $request->input('tierart');
         // try to create a new species if it doesn't exist already
-        $species = Species::firstOrCreate(['species'=>$speciesname], ['department_id'=>$department] );
+        $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
 
         // get value from 'rasse' field
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
-        $breed = Breed::firstOrCreate(['breed'=>$breedname], ['species_id'=>$species->id] );
-        
+        $breed = Breed::firstOrCreate(['breed' => $breedname], ['species_id' => $species->id]);
+
         /**     
-        * Handle file upload
-        */
-        if($request->hasFile('tierbild')) {
+         * Handle file upload
+         */
+        if ($request->hasFile('tierbild')) {
             // get filename with extension
             $filenameWithExt = $request->file('tierbild')->getClientOriginalName();
             // get just the filename
@@ -118,7 +118,7 @@ class AnimalsController extends Controller
             // get just extension
             $extension = $request->file('tierbild')->getClientOriginalExtension();
             // filename to store
-            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
             // upload image
             $path = $request->file('tierbild')->storeAs('public/animal_pictures', $filenameToStore);
         }
@@ -135,8 +135,8 @@ class AnimalsController extends Controller
         $animal->admission_date = $request->input('aufnahme');
         $animal->mediated = $request->input('vermittelt');
         $animal->castrated = $request->input('kastriert');
-        if($request->hasFile('tierbild')) {
-        $animal->animal_picture = $filenameToStore;
+        if ($request->hasFile('tierbild')) {
+            $animal->animal_picture = $filenameToStore;
         } else {
             $animal->animal_picture = "";
         }
@@ -167,8 +167,8 @@ class AnimalsController extends Controller
         $departments = Department::all();
         $animal = Animal::find($id);
         return view('pages.animal.editAnimal')
-        ->with('animal', $animal)
-        ->with('departments', $departments);
+            ->with('animal', $animal)
+            ->with('departments', $departments);
     }
 
     /**
@@ -180,8 +180,8 @@ class AnimalsController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // validate form data
-         $this->validate($request, [
+        // validate form data
+        $this->validate($request, [
             'name' => 'required',
             'rasse' => 'required',
             'tierart' => 'required',
@@ -195,17 +195,17 @@ class AnimalsController extends Controller
         // get value from 'tierart' field
         $speciesname = $request->input('tierart');
         // try to create a new species if it doesn't exist already
-        $species = Species::firstOrCreate(['species'=>$speciesname], ['department_id'=>$department] );
+        $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
 
         // get value from 'rasse' field
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
-        $breed = Breed::firstOrCreate(['breed'=>$breedname], ['species_id'=>$species->id] );
+        $breed = Breed::firstOrCreate(['breed' => $breedname], ['species_id' => $species->id]);
 
         /**     
-        * Handle file upload
-        */
-        if($request->hasFile('tierbild')) {
+         * Handle file upload
+         */
+        if ($request->hasFile('tierbild')) {
             // get filename with extension
             $filenameWithExt = $request->file('tierbild')->getClientOriginalName();
             // get just the filename
@@ -213,7 +213,7 @@ class AnimalsController extends Controller
             // get just extension
             $extension = $request->file('tierbild')->getClientOriginalExtension();
             // filename to store
-            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
             // upload image
             $path = $request->file('tierbild')->storeAs('public/animal_pictures', $filenameToStore);
         }
@@ -230,9 +230,9 @@ class AnimalsController extends Controller
         $animal->admission_date = $request->input('aufnahme');
         $animal->mediated = $request->input('vermittelt');
         $animal->castrated = $request->input('kastriert');
-        if($request->hasFile('tierbild')){
-            if($animal->animal_picture != null){
-                Storage::delete('public/animal_pictures/'.$animal->animal_picture);
+        if ($request->hasFile('tierbild')) {
+            if ($animal->animal_picture != null) {
+                Storage::delete('public/animal_pictures/' . $animal->animal_picture);
                 $animal->animal_picture = $filenameToStore;
             } else {
                 $animal->animal_picture = $filenameToStore;
@@ -252,9 +252,9 @@ class AnimalsController extends Controller
     {
         $animal = Animal::find($id);
 
-        if($animal->animal_picture != null) {
+        if ($animal->animal_picture != null) {
             // delete image
-            Storage::delete('public/animal_pictures/'.$animal->animal_picture);
+            Storage::delete('public/animal_pictures/' . $animal->animal_picture);
         }
 
         $animal->delete();

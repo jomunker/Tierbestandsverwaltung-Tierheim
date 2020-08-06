@@ -2,8 +2,17 @@
 
 @section('content')
 
-    <div class="d-flex w-100">
+    {{-- <div class="d-flex w-100">
         <a href="/categories" class="btn btn-secondary mb-4 text-white">Zurück</a>
+    </div> --}}
+
+    <div class="d-flex w-100 align-items-center">
+        {{-- <h1 class="font-weight-bold mt-3 mb-4">{{ $category->species }}</h1>
+        --}}
+        <a href="/categories" class="btn btn-secondary mb-4 text-white">Zurück</a>
+        @if (!Auth::guest())
+            <a href="/animals/create" class="btn btn-success mb-4 ml-auto" style="width: fit-content">Tier hinzufügen</a>
+        @endif
     </div>
 
     <h1 class="font-weight-bold mt-3 mb-4">{{ $category->species }}</h1>

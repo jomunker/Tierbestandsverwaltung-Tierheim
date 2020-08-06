@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="d-flex w-100 align-items-center">
+        <h1 class="font-weight-bold mt-3 mb-4">Tierübersicht</h1>
 
+        @if (!Auth::guest())
+            <a href="/animals/create" class="btn btn-success mb-4 ml-auto" style="width: fit-content; height: fit-content">Tier hinzufügen</a>
+        @endif
+    </div>
 
-    <h1 class="font-weight-bold mt-3 mb-4">Tierübersicht</h1>
     {!! Form::open(['action' => 'AnimalsController@search', 'method' => 'GET']) !!}
     <div class="form-group ml-md-2 mr-md-2">
         <div class="row pb-4">
@@ -17,7 +22,7 @@
             </div>
             <div class="col-sm-6 col-md-2 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2">
                 {{ Form::label('kastriert', 'Kastriert') }}
-                {{ Form::select('kastriert', ['' => 'egal', '1' => 'ja', '0' => 'nein'], request('castrated'), ['id' => 'castrated', 'class' => 'form-control']) }}
+                {{ Form::select('kastriert', ['' => 'egal', '1' => 'ja', '0' => 'nein'], request('kastriert'), ['id' => 'castrated', 'class' => 'form-control']) }}
             </div>
             <div class="col-sm-12 col-md-2 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2 d-flex">
                 {{ Form::button('Zurücksetzen', ['class' => 'btn btn-secondary align-self-end w-100', 'onclick' => 'resetValues();submit()']) }}
@@ -77,7 +82,8 @@
                             {{-- <p class="card-text mb-auto">This is a wider card with
                                 supporting text below as a natural lead-in to additional content.</p>
                             --}}
-                            <a href="/animals/{{ $animal->id }}" class="stretched-link btn btn-primary text-white">Mehr anzeigen</a>
+                            <a href="/animals/{{ $animal->id }}" class="stretched-link btn btn-primary text-white">Mehr
+                                anzeigen</a>
                         </div>
                     </div>
                 </div>
@@ -91,11 +97,10 @@
 @endsection
 
 <script>
-
     function resetValues() {
         document.getElementById('search').value = "";
         document.getElementById('gender').value = "";
         document.getElementById('castrated').value = "";
     }
-    
-    </script>
+
+</script>
