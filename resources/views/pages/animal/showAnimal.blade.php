@@ -3,8 +3,18 @@
 @section('content')
 
     <div class="d-flex w-100">
-        <a href="{{ url()->previous() }}" class="btn btn-secondary mb-4 text-white">Zurück</a>
-        @if (!Auth::guest())
+        @if ((strpos(strval(url()->previous()), 'categories') !== false) && (strpos(strval(url()->previous()), 'animals') !== false))
+            <a href="/categories" class="btn btn-secondary mb-4 text-white">Zurück</a>
+        @else
+            @if (strpos(strval(url()->previous()), 'categories') !== false)
+            <a href="/categories" class="btn btn-secondary mb-4 text-white">Zurück</a>
+            @endif
+            @if (strpos(strval(url()->previous()), 'animals') !== false)
+            <a href="/animals" class="btn btn-secondary mb-4 text-white">Zurück</a>
+            @endif
+        @endif
+        
+        @if (!Auth::guest()  && Auth::user()->admin == 1)
             <a href="/animals/{{ $animal->id }}/edit" class="btn btn-dark mb-4 ml-auto"
                 style="width: fit-content">Bearbeiten</a>
             {!! Form::open(['action' => ['AnimalsController@destroy', $animal->id], '_method' => 'POST', 'class' => 'ml-2'])
@@ -22,18 +32,18 @@
 
     <div class="row mb-3" style="height: 20rem;">
         @if ($animal->animal_picture != null)
-            <div class="col-6 d-none d-block w-100" style="height: 100%;">
+            <div class="col-12 col-md-6 d-block w-100" style="height: 100%;">
                 <img class="rounded w-100" style="object-fit: cover; height: 100%;"
                     src="/storage/animal_pictures/{{ $animal->animal_picture }}">
             </div>
         @else
-            <div class="col-6 d-none d-block w-100" style="height: 100%;">
+            <div class="col-12 col-md-6 d-none d-block w-100" style="height: 100%;">
                 <img class="rounded w-100" style="object-fit: cover; height: 100%;"
                     src="/storage/animal_pictures/noimage.png">
             </div>
         @endif
-        <div class=" col-6 pr-3 pl-3 d-flex flex-column position-static card" style="height: 100%;">
-            <ul class="list-unstyled d-flex flex-column mt-3" style="margin: 0; height: 100%">
+        <div class="col-12 col-md-6 d-flex mt-4 mt-md-0 w-100" style="height: 100%;">
+            <ul class="list-unstyled d-flex flex-column pt-4 pl-4 pr-4 pb-2 w-100 card" style="margin: 0; height: 100%">
                 <li class="flex-fill w-100"><strong>Geschlecht: </strong>
                     @if ($animal->gender == 'w')
                         <span class="text-muted">weiblich</span>
@@ -70,25 +80,44 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div>
-        <div class="ml-auto mr-auto mt-4 mb-4">
-            <p class="mt-3 w-100 text-justify" style="column-count: 2; width: 50%;">{{ $animal->description }}</p>
+        <div class="col-12 ml-auto mr-auto mt-4 mb-2 d-flex">
+            <p class="mt-3 w-100 m-auto text-justify" style="">{{ $animal->description }}</p>
         </div>
-        <hr>
-        <div class="ml-auto mr-auto mt-4 mb-4">
-            <h3>Du möchtest mich besser kennenlernen?</h3>
-            <ul class="list-unstyled d-flex flex-column">
-                <li class="flex-fill w-100"><strong>Ansprechpartner: </strong><span
-                        class="text-muted">{{ $animal->breed->species->department->contact_name }}
-                        {{ $animal->breed->species->department->contact_surname }}</span></li>
-                <li class="flex-fill w-100"><strong>Abteilung: </strong><span
-                        class="text-muted">{{ $animal->breed->species->department->department }}</span></li>
-                <li class="flex-fill w-100"><strong>Telefonnummer: </strong><span class="text-muted"><a
-                            href="tel:{{ $animal->breed->species->department->contact_telefon }}">{{ $animal->breed->species->department->contact_telefon }}</a></span>
-                </li>
-            </ul>
+        <div class="col-12 ml-auto mr-auto mb-4">
+
+            @if ($animal->mediated == 0)
+                <hr>
+                <h2 class="mt-4">Du möchtest mich besser kennenlernen?</h2>
+                <ul class="list-unstyled d-flex flex-column">
+                    <li class="flex-fill w-100"><strong>Ansprechpartner: </strong><span
+                            class="text-muted">{{ $animal->breed->species->department->contact_name }}
+                            {{ $animal->breed->species->department->contact_surname }}</span></li>
+                    <li class="flex-fill w-100"><strong>Abteilung: </strong><span
+                            class="text-muted">{{ $animal->breed->species->department->department }}</span></li>
+                    <li class="flex-fill w-100"><strong>Telefonnummer: </strong><span class="text-muted"><a
+                                href="tel:{{ $animal->breed->species->department->contact_telefon }}">{{ $animal->breed->species->department->contact_telefon }}</a></span>
+                    </li>
+                </ul>
+            @else
+                <hr>
+                <h2 class="mt-4">Ich bin leider schon vergeben aber du kannst mich trotzdem gerne besuchen.</h2>
+                <ul class="list-unstyled d-flex flex-column">
+                    <li class="flex-fill w-100"><strong>Ansprechpartner: </strong><span
+                            class="text-muted">{{ $animal->breed->species->department->contact_name }}
+                            {{ $animal->breed->species->department->contact_surname }}</span></li>
+                    <li class="flex-fill w-100"><strong>Abteilung: </strong><span
+                            class="text-muted">{{ $animal->breed->species->department->department }}</span></li>
+                    <li class="flex-fill w-100"><strong>Telefonnummer: </strong><span class="text-muted"><a
+                                href="tel:{{ $animal->breed->species->department->contact_telefon }}">{{ $animal->breed->species->department->contact_telefon }}</a></span>
+                    </li>
+                </ul>
+            @endif
         </div>
     </div>
+
+
+
+
+
 
 @endsection

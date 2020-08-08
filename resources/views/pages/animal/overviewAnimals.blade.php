@@ -4,35 +4,35 @@
     <div class="d-flex w-100 align-items-center">
         <h1 class="font-weight-bold mt-3 mb-4">Tierübersicht</h1>
 
-        @if (!Auth::guest())
-            <a href="/animals/create" class="btn btn-success mb-4 ml-auto" style="width: fit-content; height: fit-content">Tier hinzufügen</a>
+        @if (!Auth::guest() && Auth::user()->admin == 1)
+            <a href="/animals/create" class="btn btn-success mb-4 ml-auto"
+                style="width: fit-content; height: fit-content">Tier hinzufügen</a>
         @endif
     </div>
-
-    {!! Form::open(['action' => 'AnimalsController@search', 'method' => 'GET']) !!}
-    <div class="form-group ml-md-2 mr-md-2">
-        <div class="row pb-4">
-            <div class="col-sm-12 col-md-4 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2">
-                {{ Form::label('suche', 'Suchbegriff') }}
-                {{ Form::text('suche', request('suche'), ['id' => 'search', 'class' => 'form-control', 'placeholder' => 'Suchbegriff eingeben...']) }}
-            </div>
-            <div class="col-sm-6 col-md-2 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2">
-                {{ Form::label('geschlecht', 'Geschlecht') }}
-                {{ Form::select('geschlecht', ['' => 'egal', 'm' => 'männlich', 'w' => 'weiblich'], request('geschlecht'), ['id' => 'gender', 'class' => 'form-control']) }}
-            </div>
-            <div class="col-sm-6 col-md-2 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2">
-                {{ Form::label('kastriert', 'Kastriert') }}
-                {{ Form::select('kastriert', ['' => 'egal', '1' => 'ja', '0' => 'nein'], request('kastriert'), ['id' => 'castrated', 'class' => 'form-control']) }}
-            </div>
-            <div class="col-sm-12 col-md-2 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2 d-flex">
-                {{ Form::button('Zurücksetzen', ['class' => 'btn btn-secondary align-self-end w-100', 'onclick' => 'resetValues();submit()']) }}
-            </div>
-            <div class="col-sm-12 col-md-2 pl-1 pl-lg-2 pt-2 pr-1 pr-lg-2 pb-2 d-flex">
-                {{ Form::submit('Suchen', ['class' => 'btn btn-success align-self-end w-100']) }}
+        {!! Form::open(['action' => 'AnimalsController@search', 'method' => 'GET']) !!}
+        <div class="form-group">
+            <div class="row pb-4">
+                <div class="col-sm-12 col-md-4  pt-2 pb-2">
+                    {{ Form::label('suche', 'Suchbegriff') }}
+                    {{ Form::text('suche', request('suche'), ['id' => 'search', 'class' => 'form-control', 'placeholder' => 'Suchbegriff eingeben...']) }}
+                </div>
+                <div class="col-sm-6 col-md-2  pt-2 pb-2">
+                    {{ Form::label('geschlecht', 'Geschlecht') }}
+                    {{ Form::select('geschlecht', ['' => 'egal', 'm' => 'männlich', 'w' => 'weiblich'], request('geschlecht'), ['id' => 'gender', 'class' => 'form-control']) }}
+                </div>
+                <div class="col-sm-6 col-md-2  pt-2 pb-2">
+                    {{ Form::label('kastriert', 'Kastriert') }}
+                    {{ Form::select('kastriert', ['' => 'egal', '1' => 'ja', '0' => 'nein'], request('kastriert'), ['id' => 'castrated', 'class' => 'form-control']) }}
+                </div>
+                <div class="col-sm-6 col-md-2  pt-2 pb-2 d-flex">
+                    {{ Form::button('Reset', ['class' => 'btn btn-secondary align-self-end w-100', 'onclick' => 'resetValues();submit()']) }}
+                </div>
+                <div class="col-sm-6 col-md-2  pt-2 pb-2 d-flex">
+                    {{ Form::submit('Suchen', ['class' => 'btn btn-success align-self-end w-100']) }}
+                </div>
             </div>
         </div>
-    </div>
-    {!! Form::close() !!}
+        {!! Form::close() !!}
     @if (count($animals) >= 1)
         <div class="row mb-3">
 

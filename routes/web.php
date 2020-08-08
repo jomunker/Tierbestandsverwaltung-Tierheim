@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PagesController@index');
+Route::get('/', 'AnimalsController@index');
 
 Route::get('/animals/search', 'AnimalsController@search');
 
@@ -23,10 +23,12 @@ Route::get('/categories/{category}', 'AnimalsController@showCategory');
 
 Route::get('/categories/animals/{animal}', 'AnimalsController@show');
 
+Route::get('/categories/animals/{animal}/edit', 'AnimalsController@edit');
+
 Route::resource('animals', 'AnimalsController');
 
 Route::resource('departments', 'DepartmentController');
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index');
+// Route::get('/dashboard', 'DashboardController@index');

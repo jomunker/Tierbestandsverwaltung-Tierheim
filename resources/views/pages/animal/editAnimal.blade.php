@@ -29,7 +29,7 @@
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('abteilung', 'Abteilung')}}
-                {{Form::select('abteilung', $departments->pluck('department'), $animal->breed->species->department_id, ['id' => 'department', 'class' => 'form-control'])}}             
+                {{Form::select('abteilung', $departments->pluck('department','id'), $animal->breed->species->department_id, ['class' => 'form-control'])}}             
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('farbe', 'Farbe(n)')}}
@@ -62,6 +62,7 @@
             {{Form::hidden('max_file_size', '2000000')}}
             <div class="col-sm-12 col-md-12 pt-4 pb-2"> 
                 {{Form::File('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
+                <small class="text-muted mt-2 d-block">Maximale Dateigröße 5MB</small>
             </div>
         </div>
         {{Form::hidden('_method', 'PUT')}}

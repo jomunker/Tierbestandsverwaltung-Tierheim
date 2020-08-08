@@ -10,7 +10,7 @@
         {{-- <h1 class="font-weight-bold mt-3 mb-4">{{ $category->species }}</h1>
         --}}
         <a href="/categories" class="btn btn-secondary mb-4 text-white">Zurück</a>
-        @if (!Auth::guest())
+        @if (!Auth::guest() && Auth::user()->admin == 1)
             <a href="/animals/create" class="btn btn-success mb-4 ml-auto" style="width: fit-content">Tier hinzufügen</a>
         @endif
     </div>
@@ -62,10 +62,7 @@
                                     @endif
                                 </li>
                             </ul>
-                            {{-- <p class="card-text mb-auto">This is a wider card with
-                                supporting text below as a natural lead-in to additional content.</p>
-                            --}}
-                            <a href="/categories/animals/{{ $animal->id }}" class="stretched-link">Mehr anzeigen</a>
+                            <a href="/categories/animals/{{ $animal->id }}/edit" class="stretched-link">Mehr anzeigen</a>
                         </div>
                     </div>
                 </div>

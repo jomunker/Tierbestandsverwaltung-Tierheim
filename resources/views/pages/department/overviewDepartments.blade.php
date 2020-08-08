@@ -4,7 +4,7 @@
 
     <div class="d-flex w-100">
         <a href="/animals" class="btn btn-secondary mb-4 text-white">Zurück</a>
-        @if (!Auth::guest())
+        @if (!Auth::guest() && Auth::user()->admin == 1)
             <a href="/departments/create" class="btn btn-success mb-4 ml-auto" style="width: fit-content">Abteilung
                 hinzufügen</a>
         @endif
@@ -16,7 +16,7 @@
     @if (count($departments) >= 1)
         <div class="row mb-3">
             @foreach ($departments as $department)
-                <div class="col-sm-6 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div
                         class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
@@ -28,12 +28,13 @@
                                 <li class="flex-fill w-100"><strong>Telefonnummer: </strong><span
                                         class="text-muted">{{ $department->contact_telefon }}</span></li>
                             </ul>
+                            @if (!Auth::guest() && Auth::user()->admin == 1)
                             <div class="row">
-                                <div class="col-sm-6 w-100 pr-2">
+                                <div class="col-6 w-100 pr-2">
                                     <a href="/departments/{{ $department->id }}/edit"
                                         class="btn btn-primary text-white w-100">Bearbeiten</a>
                                 </div>
-                                <div class="col-sm-6 w-100 pl-2">
+                                <div class="col-6 w-100 pl-2">
 
                                     {!! Form::open(['action' => ['DepartmentController@destroy', $department->id], '_method'
                                     => 'POST', 'class' => '']) !!}
@@ -42,6 +43,7 @@
                                     {!! Form::close() !!}
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class="d-flex w-100">
+    <a href="{{ url()->previous() }}" class="btn btn-secondary mb-4 text-white">Zurück</a>
+</div>
 
 <h1 class="font-weight-bold">Tier hinzufügen</h1>
 
@@ -60,7 +62,7 @@
             </div>
             <div class="col-sm-12 col-md-12 pt-4 pb-2"> 
                 {{Form::file('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
-                <small class="text-muted mt-2 d-block">Maximale Dateigröße 2MB</small>
+                <small class="text-muted mt-2 d-block">Maximale Dateigröße 5MB</small>
             </div>
         </div>
         {{Form::submit('Tier hinzufügen', ['class' => 'btn btn-success'])}}

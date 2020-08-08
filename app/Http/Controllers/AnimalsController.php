@@ -88,7 +88,7 @@ class AnimalsController extends Controller
             'rasse' => 'required',
             'tierart' => 'required',
             'farbe' => 'required',
-            'tierbild' => 'image|nullable|max:1999'
+            'tierbild' => 'image|nullable|max:5000'
         ]);
 
         /**
@@ -101,11 +101,15 @@ class AnimalsController extends Controller
         $speciesname = $request->input('tierart');
         // try to create a new species if it doesn't exist already
         $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
+        // saves species
+        $species->save();
 
         // get value from 'rasse' field
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
         $breed = Breed::firstOrCreate(['breed' => $breedname], ['species_id' => $species->id]);
+        // saves breed
+        $breed->save();
 
         /**     
          * Handle file upload
@@ -186,21 +190,28 @@ class AnimalsController extends Controller
             'rasse' => 'required',
             'tierart' => 'required',
             'farbe' => 'required',
-            'tierbild' => 'image|nullable|max:1999'
+            'tierbild' => 'image|nullable|max:5000'
         ]);
 
         // get department id
-        $department = intval($request->input('abteilung'));
+        $department = $request->input('abteilung');
+        // return $department;
 
         // get value from 'tierart' field
         $speciesname = $request->input('tierart');
         // try to create a new species if it doesn't exist already
-        $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
+        $species = Species::firstOrCreate(['species' => $speciesname]);
+        $species->department_id = $department;
+        $species->save();
+
 
         // get value from 'rasse' field
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
-        $breed = Breed::firstOrCreate(['breed' => $breedname], ['species_id' => $species->id]);
+        $breed = Breed::firstOrCreate(['breed' => $breedname]);
+        $breed->species_id = $species->id;
+        $breed->save();
+
 
         /**     
          * Handle file upload

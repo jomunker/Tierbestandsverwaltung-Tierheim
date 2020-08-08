@@ -99,7 +99,7 @@ class DepartmentController extends Controller
     {
         // validate form data
         $this->validate($request, [
-            'abteilungsname' => 'required|unique:departments,department',
+            'abteilungsname' => 'required|unique:departments,department,' . $id,
             'kontaktvorname' => 'required',
             'kontaktnachname' => 'required',
             'kontakttelefon' => 'required'

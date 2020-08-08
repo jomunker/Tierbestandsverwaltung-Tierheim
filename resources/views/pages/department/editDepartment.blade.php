@@ -4,7 +4,7 @@
 
     <div class="d-flex w-100">
         <a href="/departments" class="btn btn-secondary mb-4 text-white">Zurück</a>
-        @if (!Auth::guest())
+        @if (!Auth::guest() && Auth::user()->admin == 1)
             {!! Form::open(['action' => ['AnimalsController@destroy', $department->id], '_method' => 'POST', 'class' => 'ml-auto'])!!}
             {{ Form::hidden('_method', 'DELETE') }}
             {{ Form::submit('Löschen', ['class' => 'btn btn-danger']) }}

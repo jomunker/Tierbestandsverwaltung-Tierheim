@@ -5,7 +5,7 @@
     <div class="d-flex w-100 align-items-center">
         <h1 class="font-weight-bold mt-3 mb-4">Tierarten</h1>
 
-        @if (!Auth::guest())
+        @if (!Auth::guest()  && Auth::user()->admin == 1)
             <a href="/animals/create" class="btn btn-success mb-4 ml-auto"
                 style="width: fit-content; height: fit-content">Tier hinzufügen</a>
         @endif
