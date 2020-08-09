@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class CreateDepartmentsTable extends Migration
 {
@@ -13,6 +15,7 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
+        // Schema for a department table
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('department', 30);
@@ -21,6 +24,9 @@ class CreateDepartmentsTable extends Migration
             $table->string('contact_telefon', 15);
             $table->timestamps();
         });
+
+        DB::unprepared(File::get(base_path() . '/database/seeds/departments.sql'));
+
     }
 
     /**

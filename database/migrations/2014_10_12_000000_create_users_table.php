@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class CreateUsersTable extends Migration
 {
@@ -23,6 +25,9 @@ class CreateUsersTable extends Migration
             $table->boolean('admin')->default(0);
             $table->timestamps();
         });
+
+        DB::unprepared(File::get(base_path() . '/database/seeds/users.sql'));
+
     }
 
     /**
