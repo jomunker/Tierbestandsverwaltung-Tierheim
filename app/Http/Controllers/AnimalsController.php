@@ -26,7 +26,7 @@ class AnimalsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the all animals.
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,36 +36,36 @@ class AnimalsController extends Controller
         return view('pages.animal.overviewAnimals')->with('animals', $animals);
     }
 
+    /**
+     * Handles search requests and returns all animals that match the search parameters.
+     */
     public function search()
     {
         $request = request();
-
         $animals = Animal::Search($request->suche)->Gender($request->geschlecht)->Castrated($request->kastriert)->orderBy('name', 'asc')->paginate(6);
         return view('pages.animal.overviewAnimals')->with('animals', $animals);
     }
 
+    /**
+     * Show a page with all species.
+     */
     public function categories()
     {
-        // $breeds = Breed::all();
         $species = Species::orderBy('species', 'asc')->paginate(6);
-
-        // $animals = Animal::Search($request->suche)->Gender($request->geschlecht)->Castrated($request->kastriert)->orderBy('name', 'asc')->paginate(6);
         return view('pages.categories')->with('species', $species);
     }
 
+    /**
+     * Show a page with all animals of the specified species. 
+     */
     public function showCategory($id)
     {
         $category = Species::find($id);
-        //$animals = Animal::Category($id)->orderBy('name', 'asc')->paginate(6);
-        // return $animals;
-
-        // $animals = $category->animals->sortByDesc('name');
-
         return view('pages.showCategory')->with('category', $category);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new animal.
      *
      * @return \Illuminate\Http\Response
      */
@@ -76,7 +76,7 @@ class AnimalsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created animal in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -150,7 +150,7 @@ class AnimalsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified animal.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -162,7 +162,7 @@ class AnimalsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified animal.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -177,7 +177,7 @@ class AnimalsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified animal in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -194,8 +194,11 @@ class AnimalsController extends Controller
             'tierbild' => 'image|nullable|max:5000'
         ]);
 
+        /**
+         * Handle relationships when creating a new animal
+         */
         // get department id
-        $department = $request->input('abteilung');
+        $department = intval($request->input('abteilung'));
         // return $department;
 
         // get value from 'tierart' field
@@ -209,8 +212,8 @@ class AnimalsController extends Controller
         // get value from 'rasse' field
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
-        $breed = Breed::firstOrCreate(['breed' => $breedname]);
-        $breed->species_id = $species->id;
+        $breed = Breed::firstOrCreate(['breed' => $breedname] , ['species_id' => $species->id]);
+        // $breed->species_id = $species->id;
         $breed->save();
 
 
@@ -246,16 +249,14 @@ class AnimalsController extends Controller
             if ($animal->animal_picture != null) {
                 Storage::delete('public/animal_pictures/' . $animal->animal_picture);
                 $animal->animal_picture = $filenameToStore;
-            } else {
-                $animal->animal_picture = $filenameToStore;
-            }
+            } 
         }
         $animal->save();
         return redirect('/animals')->with('success', 'Tier aktualisiert');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified animal from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -264,8 +265,8 @@ class AnimalsController extends Controller
     {
         $animal = Animal::find($id);
 
+        // delete image if exists
         if ($animal->animal_picture != null) {
-            // delete image
             Storage::delete('public/animal_pictures/' . $animal->animal_picture);
         }
 

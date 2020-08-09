@@ -16,7 +16,6 @@ class Animal extends Model
         return Carbon::parse($this->attributes['birth_date'])->age;
     }
 
-
     /**
      * Setup relationships
      */
@@ -64,12 +63,4 @@ class Animal extends Model
             return $query->where('castrated', '=', $castrated);
         }
     }
-
-    // scope for categories
-    // public function scopeCategory($query, $id)
-    // {
-    //     return $query->whereHas('breed', function ($query) use ( $id ){
-    //         $query->where('species_id', '=', $id);
-    //     });
-    // }
 }

@@ -62,7 +62,7 @@
                                     @endif
                                 </li>
                             </ul>
-                            <a href="/categories/animals/{{ $animal->id }}/edit" class="stretched-link">Mehr anzeigen</a>
+                            <a href="/categories/animals/{{ $animal->id }}" class="stretched-link">Mehr anzeigen</a>
                         </div>
                     </div>
                 </div>

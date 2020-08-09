@@ -12,7 +12,7 @@
     <div class="form-group">
 
         <div class="row pb-4">
-            <div class="col-sm-6 col-md-3 pt-2 pb-2">
+            <div class="col-sm-6 col-md-6 pt-2 pb-2">
                 {{Form::label('name', 'Name')}}
                 {{Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Namen eingeben'])}}
             </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('abteilung', 'Abteilung')}}
-                {{Form::select('abteilung', $departments->pluck('department'), '', ['id' => 'department', 'class' => 'form-control'])}}             
+                {{Form::select('abteilung', $departments->pluck('department','id'), '', ['id' => 'department', 'class' => 'form-control'])}}             
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('farbe', 'Farbe(n)')}}
@@ -62,7 +62,7 @@
             </div>
             <div class="col-sm-12 col-md-12 pt-4 pb-2"> 
                 {{Form::file('tierbild', [ 'accept' => 'image/jpg,image/png,image/jpeg,image/gif'])}}
-                <small class="text-muted mt-2 d-block">Maximale Dateigröße 5MB</small>
+                <small class="text-muted mt-2 d-block">Maximale Dateigröße 2MB</small>
             </div>
         </div>
         {{Form::submit('Tier hinzufügen', ['class' => 'btn btn-success'])}}

@@ -22,15 +22,9 @@
                         <a class="nav-link" href="/animals/create">Tier Hinzufügen</a>
                     </li>
                 @endif --}}
-                @if (!Auth::guest() && Auth::user()->admin == 1)
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departments">Abteilungen verwalten</a>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departments">Abteilungen</a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="/departments">Abteilungen</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -60,7 +54,7 @@
                                 <a class="dropdown-item" href="/departments">Abteilungen anschauen</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
+                                                                document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 

@@ -19,7 +19,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of all departments.
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +30,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new department.
      *
      * @return \Illuminate\Http\Response
      */
@@ -40,7 +40,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created department in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -66,7 +66,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified department.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -78,7 +78,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified department.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -90,7 +90,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified department in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -117,7 +117,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified department from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
