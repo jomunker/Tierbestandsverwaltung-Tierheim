@@ -102,6 +102,7 @@ class AnimalsController extends Controller
         $speciesname = $request->input('tierart');
         // try to create a new species if it doesn't exist already
         $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
+        $species->department_id = $department;
         // saves species
         $species->save();
 
@@ -109,6 +110,7 @@ class AnimalsController extends Controller
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
         $breed = Breed::firstOrCreate(['breed' => $breedname], ['species_id' => $species->id]);
+        $breed->species_id = $species->id;
         // saves breed
         $breed->save();
 
@@ -206,14 +208,16 @@ class AnimalsController extends Controller
         // try to create a new species if it doesn't exist already
         $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
         $species->department_id = $department;
+        // saves species
         $species->save();
 
 
         // get value from 'rasse' field
         $breedname = $request->input('rasse');
         // try to create a new breed if it doesn't exist already
-        $breed = Breed::firstOrCreate(['breed' => $breedname] , ['species_id' => $species->id]);
-        // $breed->species_id = $species->id;
+        $breed = Breed::firstOrCreate(['breed' => $breedname], ['species_id' => $species->id]);
+        $breed->species_id = $species->id;
+        // saves breed
         $breed->save();
 
 
@@ -249,7 +253,7 @@ class AnimalsController extends Controller
             if ($animal->animal_picture != null) {
                 Storage::delete('public/animal_pictures/' . $animal->animal_picture);
                 $animal->animal_picture = $filenameToStore;
-            } 
+            }
         }
         $animal->save();
         return redirect('/animals')->with('success', 'Tier aktualisiert');
