@@ -204,7 +204,7 @@ class AnimalsController extends Controller
         // get value from 'tierart' field
         $speciesname = $request->input('tierart');
         // try to create a new species if it doesn't exist already
-        $species = Species::firstOrCreate(['species' => $speciesname]);
+        $species = Species::firstOrCreate(['species' => $speciesname], ['department_id' => $department]);
         $species->department_id = $department;
         $species->save();
 

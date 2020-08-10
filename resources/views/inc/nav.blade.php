@@ -48,7 +48,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @if (!Auth::guest() && Auth::user()->admin == 1)
-                                <a class="dropdown-item" href="/animals/create">Tier Hinzufügen</a>
+                                <a class="dropdown-item" href="/animals/create">Tier hinzufügen</a>
                                 <a class="dropdown-item" href="/departments">Abteilungen verwalten</a>
                             @else
                                 <a class="dropdown-item" href="/departments">Abteilungen anschauen</a>

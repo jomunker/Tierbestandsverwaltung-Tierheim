@@ -56,7 +56,7 @@
                 {{Form::label('vermittelt', 'Vermittelt')}}
                 {{Form::select('vermittelt', ['0' => 'nein', '1' => 'ja'], '0', ['id' => 'mediated', 'class' => 'form-control'])}}     
             </div>
-            <div class="col-sm-12 col-md-6 pt-2 pb-2"> 
+            <div class="col-sm-12 col-md-12 pt-2 pb-2"> 
                 {{Form::label('beschreibung', 'Beschreibung')}}
                 {{Form::textarea('beschreibung', '', ['id' => 'description', 'class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
             </div>

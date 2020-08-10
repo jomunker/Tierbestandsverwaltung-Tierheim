@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-6 col-md-3 pt-2 pb-2">
                 {{Form::label('kontakttelefon', 'Kontakttelefon')}}
-                {{Form::text('kontakttelefon', '', ['id' => 'kontaktnachname', 'class' => 'form-control', 'placeholder' => 'Nachnamen der Kontaktperson eingeben'])}}
+                {{Form::text('kontakttelefon', '', ['id' => 'kontaktnachname', 'class' => 'form-control', 'placeholder' => 'Telefonnummer Kontaktperson'], )}}
             </div>
         </div>
         {{Form::submit('Abteilung anlegen', ['class' => 'btn btn-success'])}}

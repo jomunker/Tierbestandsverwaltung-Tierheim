@@ -55,7 +55,7 @@
                 {{Form::label('vermittelt', 'Vermittelt')}}
                 {{Form::select('vermittelt', ['0' => 'nein', '1' => 'ja'], $animal->mediated, ['id' => 'mediated', 'class' => 'form-control'])}}     
             </div>
-            <div class="col-sm-12 col-md-6 pt-2 pb-2"> 
+            <div class="col-sm-12 col-md-12 pt-2 pb-2"> 
                 {{Form::label('beschreibung', 'Beschreibung')}}
                 {{Form::textarea('beschreibung', $animal->description, ['id' => 'description', 'class' => 'form-control', 'placeholder' => 'Beschreibung eingeben'])}}
             </div>
