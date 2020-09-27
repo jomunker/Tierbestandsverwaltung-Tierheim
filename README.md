@@ -20,7 +20,7 @@ Dieses Projekt ist im Rahmen einer Studienarbeit im Fach "Client Server" der Hoc
 
 ## Idee
 
-Die Grundidee besteht darin, ein einfaches Sytem für Tierheime zu schaffen, mit dem der aktuelle Tierbestand verwaltet werden kann. Gleichzeitig sollen sich User und Gäste die aktuellen Tiere ansehen und weitere Informationen holen können. 
+Die Grundidee besteht darin, ein einfaches System für Tierheime zu schaffen, mit dem der aktuelle Tierbestand verwaltet werden kann. Gleichzeitig sollen sich User und Gäste die aktuellen Tiere ansehen und weitere Informationen holen können. 
 
 
 
